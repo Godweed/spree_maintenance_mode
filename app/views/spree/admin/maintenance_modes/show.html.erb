@@ -1,0 +1,29 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:theme) %>
+<% end %>
+
+<h4>Maintenance Mode <%=  Spree::Config[:maintenance_mode] ? "ON":"OFF" %></h4>
+
+
+<%= form_tag admin_maintenance_mode_path, method: :patch do %>
+  <div class="panel panel-default" data-hook="tax_rates">
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        <%= Spree.t(:set_maintenance_mode) %>
+      </h1>
+    </div>
+
+    <div class="panel-body">
+      <div class="col-md-6">
+        <div data-hook="name" class="form-group">
+          <%= select :maintenance_mode, :mode, [["On", true],["Off",false]], { selected: Spree::Config[:maintenance_mode] }, class: 'form-control select' %>
+        </div>
+      </div>
+    </div>
+<!-- [{"On" => true},{"Off" => false}] -->
+  </div>
+  <div class="form-actions" data-hook="buttons">
+    <%= button Spree.t('actions.update'), 'refresh', 'submit', {class: 'btn-success'} %>
+  </div>
+
+<% end %>
