@@ -16,7 +16,7 @@ bundle exec rails g spree_maintenance_mode:install
 ```
 
 ## Configuration
-Edit the `public/maintenance_mode.html` to suite your needs.
+Edit the `public/maintenance_mode.html` to suit your needs.
 
 ## Usage
 Toggle Maintenance mode of/off at `/admin/maintenance_mode
