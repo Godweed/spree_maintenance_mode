@@ -4,10 +4,8 @@ Spree::StoreController.class_eval do
   def maintenance_mode
     if Spree::Config[:maintenance_mode] == "true"
 
-      unless spree_current_user
-        render file: "public/maintenance_mode.html", layout: false, status: 503
-        return
-      end
+      if spree_current_user
+
 
       if spree_current_user.admin?
         Deface::Override.new(:virtual_path => 'spree/shared/_header',
@@ -22,6 +20,9 @@ Spree::StoreController.class_eval do
       else
         render file: "public/maintenance_mode.html", layout: false, status: 503
       end
+    else
+        render file: "public/maintenance_mode.html", layout: false, status: 503
+    end
     end
   end
 end
