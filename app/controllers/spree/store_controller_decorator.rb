@@ -2,7 +2,13 @@ Spree::StoreController.class_eval do
   before_filter :maintenance_mode
 
   def maintenance_mode
-    if Spree::Config[:maintenance_mode]
+    if Spree::Config[:maintenance_mode] == "true"
+
+      unless spree_current_user
+        render file: "public/maintenance_mode.html", layout: false, status: 503
+        return
+      end
+
       if spree_current_user.admin?
         Deface::Override.new(:virtual_path => 'spree/shared/_header',
       :name => 'Trying to replace the header',
