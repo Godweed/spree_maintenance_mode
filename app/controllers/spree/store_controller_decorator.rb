@@ -2,7 +2,7 @@ Spree::StoreController.class_eval do
   before_filter :maintenance_mode
 
   def maintenance_mode
-    if Spree::Config[:maintenance_mode] == "true"
+    if Spree::Config[:maintenance_mode] == true
 
       if spree_current_user
         if spree_current_user.admin?
